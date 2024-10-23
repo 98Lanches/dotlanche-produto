@@ -1,6 +1,0 @@
-@Dotlanche.Produto.WebApi_HostAddress = http://localhost:5160
-
-GET {{Dotlanche.Produto.WebApi_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
