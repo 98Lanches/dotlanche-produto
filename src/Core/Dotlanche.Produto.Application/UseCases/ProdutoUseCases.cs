@@ -1,5 +1,5 @@
-﻿using Dotlanche.Produto.Application.UseCases;
-using DotLanche.Produto.Application.Ports.Repositories;
+﻿using Dotlanche.Produto.Application.Ports;
+using Dotlanche.Produto.Application.UseCases;
 using DotLanche.Produto.Domain.Entities;
 
 namespace DotLanches.Application.Services;
