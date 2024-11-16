@@ -6,7 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace Dotlanche.Pagamento.Data.DependencyInjection
+namespace Dotlanche.Produto.Data.DependencyInjection
 {
     public static class ServiceCollectionExtensions
     {
