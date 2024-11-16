@@ -1,6 +1,5 @@
 using Dotlanche.Produto.WebApi.Extensions;
 using Dotlanche.Pagamento.Data.DependencyInjection;
-using Dotlanche.Pagamento.WebApi.Exceptions;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);

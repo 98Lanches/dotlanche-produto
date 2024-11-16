@@ -25,7 +25,7 @@ namespace Dotlanche.Pagamento.Data.DependencyInjection
             using (var sp = services.BuildServiceProvider())
             {
                 using var loggerFactory = sp.GetRequiredService<ILoggerFactory>();
-                var logger = loggerFactory.CreateLogger("Pagamento.Data.DependencyInjection");
+                var logger = loggerFactory.CreateLogger("Produto.Data.DependencyInjection");
 
                 using var scope = sp.CreateScope();
 
