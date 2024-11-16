@@ -20,6 +20,7 @@ internal class ProdutoRepository : IProdutoRepository
         var categoria = await _dbContext.Categoria.FirstOrDefaultAsync(c => c.Id == produto.Categoria.Id) ?? throw new CategoriaNotFoundException();
         produto.Categoria = categoria;
         await _dbContext.Produto.AddAsync(produto);
+        await _dbContext.SaveChangesAsync();
     }
 
     public async Task<RegistroProduto> Delete(Guid idProduto)
@@ -53,7 +54,7 @@ internal class ProdutoRepository : IProdutoRepository
         return await _dbContext.Produto.FirstOrDefaultAsync(p => p.Name == name) ?? throw new ProdutoNotFoundException();
     }
 
-    public async Task<IEnumerable<RegistroProduto>> GetOrderProducts(IEnumerable<Guid> orderList)
+    public async Task<IEnumerable<RegistroProduto>> GetByIdList(IEnumerable<Guid> orderList)
     {
         return await _dbContext.Produto
         .Where(p => orderList.Contains(p.Id))

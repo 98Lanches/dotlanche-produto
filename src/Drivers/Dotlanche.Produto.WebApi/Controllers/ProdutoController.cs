@@ -78,7 +78,7 @@ public class ProdutoController : ControllerBase
     /// Busca produtos pelo Id
     /// </summary>
     /// <param name="idProduto">Id do produto a ser buscado</param>
-    /// <returns>Lista de produtos pelo Id</returns>
+    /// <returns>Produto pelo Id</returns>
     [HttpGet("{idProduto}")]
     [ProducesResponseType(typeof(RegistroProduto), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetById([Required][FromRoute] Guid idProduto)
@@ -90,13 +90,26 @@ public class ProdutoController : ControllerBase
     /// <summary>
     /// Busca produtos pelo Id
     /// </summary>
-    /// <param name="idProduto">Id do produto a ser buscado</param>
+    /// <param name="orderList">Lista de Ids dos produtos a serem buscado, separados por vírgula</param>
     /// <returns>Lista de produtos pelo Id</returns>
     [HttpGet]
     [ProducesResponseType(typeof(RegistroProduto), StatusCodes.Status200OK)]
-    public async Task<IActionResult> GetOrderList([Required][FromBody] IEnumerable<Guid> orderList)
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> GetOrderList([Required][FromQuery] string orderList)
     {
-        var produtoList = await _services.GetOrderProducts(orderList);
+        if (string.IsNullOrEmpty(orderList))
+            return BadRequest("Order list cannot be empty.");
+
+        var orderIds = orderList.Split(',')
+                                .Select(id => Guid.TryParse(id, out var guid) ? guid : (Guid?)null)
+                                .Where(guid => guid.HasValue)
+                                .Select(guid => guid.Value)
+                                .ToList();
+
+        if (!orderIds.Any())
+            return BadRequest("Invalid IDs in order list.");
+
+        var produtoList = await _services.GetOrderProducts(orderIds);
         return Ok(produtoList);
     }
 }
