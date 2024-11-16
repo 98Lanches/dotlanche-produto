@@ -25,4 +25,9 @@
     <ProjectReference Include="..\..\Drivens\Dotlanche.Produto.Data\Dotlanche.Produto.Data.csproj" />
   </ItemGroup>
 
+  <PropertyGroup>
+	<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	<NoWarn>$(NoWarn);1591</NoWarn>
+  </PropertyGroup>
+
 </Project>
