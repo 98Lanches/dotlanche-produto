@@ -4,7 +4,7 @@ namespace Dotlanche.Produto.Application.Ports;
 
 public interface IProdutoRepository
 {
-    public Task Add(RegistroProduto produto);
+    public Task<RegistroProduto> Add(RegistroProduto produto);
     public Task<RegistroProduto> Edit(RegistroProduto produto);
     public Task<RegistroProduto> Delete(Guid idProduto);
     public Task<IEnumerable<RegistroProduto>> GetByCategoria(int idCategoria);

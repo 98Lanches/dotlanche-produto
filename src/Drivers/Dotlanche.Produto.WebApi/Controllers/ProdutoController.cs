@@ -30,8 +30,9 @@ public class ProdutoController : ControllerBase
     public async Task<IActionResult> Create([FromBody] ProdutoDto produtoDto)
     {
         var id = Guid.NewGuid();
-        await _services.Add(produtoDto.ToDomainModel(id));
-        return StatusCode(StatusCodes.Status201Created);
+        var newProduto = await _services.Add(produtoDto.ToDomainModel(id));
+
+        return StatusCode(StatusCodes.Status201Created, newProduto);
     }
     /// <summary>
     /// Atualiza um produto existente
@@ -67,7 +68,7 @@ public class ProdutoController : ControllerBase
     /// </summary>
     /// <param name="idCategoria">ID da categoria a ser buscada</param>
     /// <returns>Lista de produtos que pertencem a categoria informada</returns>
-    [HttpGet]
+    [HttpGet("categoria")]
     [ProducesResponseType(typeof(IEnumerable<RegistroProduto>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetByCategoria([Required][FromQuery] int idCategoria)
     {

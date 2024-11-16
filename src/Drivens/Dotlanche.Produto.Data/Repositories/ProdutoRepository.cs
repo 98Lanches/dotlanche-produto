@@ -15,12 +15,14 @@ internal class ProdutoRepository : IProdutoRepository
         _dbContext = dbContext;
     }
 
-    public async Task Add(RegistroProduto produto)
+    public async Task<RegistroProduto> Add(RegistroProduto produto)
     {
         var categoria = await _dbContext.Categoria.FirstOrDefaultAsync(c => c.Id == produto.Categoria.Id) ?? throw new CategoriaNotFoundException();
         produto.Categoria = categoria;
         await _dbContext.Produto.AddAsync(produto);
         await _dbContext.SaveChangesAsync();
+
+        return produto;
     }
 
     public async Task<RegistroProduto> Delete(Guid idProduto)
