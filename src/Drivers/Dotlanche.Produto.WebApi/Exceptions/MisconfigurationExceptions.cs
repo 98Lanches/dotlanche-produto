@@ -1,4 +1,4 @@
-﻿namespace Dotlanche.Pagamento.WebApi.Exceptions
+﻿namespace Dotlanche.Produto.WebApi.Exceptions
 {
     public class MisconfigurationException : Exception
     {

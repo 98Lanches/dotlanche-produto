@@ -4,7 +4,7 @@ namespace Dotlanche.Produto.Application.UseCases;
 
 public interface IProdutoUseCases
 {
-    Task Add(RegistroProduto produto);
+    Task<RegistroProduto> Add(RegistroProduto produto);
     Task<RegistroProduto> Edit(RegistroProduto produto);
     Task<RegistroProduto> Delete(Guid idProduto);
     Task<IEnumerable<RegistroProduto>> GetByCategoria(int idCategoria);

@@ -10,5 +10,12 @@ internal class CategoriaModelConfiguration : IEntityTypeConfiguration<Categoria>
     {
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Name).IsRequired();
+
+        builder.HasData(
+            new Categoria() { Id = 1, Name = "Lanche" },
+            new Categoria() { Id = 2, Name = "Acompanhamento" },
+            new Categoria() { Id = 3, Name = "Bebida" },
+            new Categoria() { Id = 4, Name = "Sobremesa" }
+        );
     }
 }

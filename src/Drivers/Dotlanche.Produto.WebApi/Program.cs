@@ -1,6 +1,5 @@
 using Dotlanche.Produto.WebApi.Extensions;
-using Dotlanche.Pagamento.Data.DependencyInjection;
-using Dotlanche.Pagamento.WebApi.Exceptions;
+using Dotlanche.Produto.Data.DependencyInjection;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,7 +15,6 @@ var app = builder.Build();
 
 app.UseSwagger();
 app.UseSwaggerUI();
-app.UseExceptionHandler();
 app.MapControllers();
 
 app.Run();

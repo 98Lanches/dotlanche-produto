@@ -1,4 +1,5 @@
 using Dotlanche.Produto.Application.UseCases;
+using Dotlanche.Produto.Data.Exceptions;
 using Dotlanche.Produto.WebApi.DTOs;
 using Dotlanche.Produto.WebApi.Mappers;
 using DotLanche.Produto.Domain.Entities;
@@ -14,6 +15,7 @@ namespace Dotlanche.Produto.WebApi.Controllers;
 public class ProdutoController : ControllerBase
 {
     private readonly IProdutoUseCases _services;
+
     public ProdutoController(IProdutoUseCases services)
     {
         _services = services;
@@ -30,9 +32,11 @@ public class ProdutoController : ControllerBase
     public async Task<IActionResult> Create([FromBody] ProdutoDto produtoDto)
     {
         var id = Guid.NewGuid();
-        await _services.Add(produtoDto.ToDomainModel(id));
-        return StatusCode(StatusCodes.Status201Created);
+        var newProduto = await _services.Add(produtoDto.ToDomainModel(id));
+
+        return StatusCode(StatusCodes.Status201Created, newProduto);
     }
+
     /// <summary>
     /// Atualiza um produto existente
     /// </summary>
@@ -45,9 +49,17 @@ public class ProdutoController : ControllerBase
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Update([FromRoute] Guid idProduto, [FromBody] ProdutoDto produtoDto)
     {
-        var produto = await _services.Edit(produtoDto.ToDomainModel(idProduto));
-        return Ok(produto);
+        try
+        {
+            var produto = await _services.Edit(produtoDto.ToDomainModel(idProduto));
+            return Ok(produto);
+        }
+        catch (ProdutoNotFoundException e)
+        {
+            return NotFound(e.Message);
+        }
     }
+
     /// <summary>
     /// Remove um produto
     /// </summary>
@@ -58,8 +70,15 @@ public class ProdutoController : ControllerBase
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Delete([FromRoute] Guid idProduto)
     {
-        var produto = await _services.Delete(idProduto);
-        return Ok(produto);
+        try
+        {
+            var produto = await _services.Delete(idProduto);
+            return Ok(produto);
+        }
+        catch (ProdutoNotFoundException e)
+        {
+            return NotFound(e.Message);
+        }
     }
 
     /// <summary>
@@ -67,13 +86,14 @@ public class ProdutoController : ControllerBase
     /// </summary>
     /// <param name="idCategoria">ID da categoria a ser buscada</param>
     /// <returns>Lista de produtos que pertencem a categoria informada</returns>
-    [HttpGet]
+    [HttpGet("categoria")]
     [ProducesResponseType(typeof(IEnumerable<RegistroProduto>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetByCategoria([Required][FromQuery] int idCategoria)
     {
         var produtoList = await _services.GetByCategoria(idCategoria);
         return Ok(produtoList);
     }
+
     /// <summary>
     /// Busca produtos pelo Id
     /// </summary>
@@ -83,8 +103,15 @@ public class ProdutoController : ControllerBase
     [ProducesResponseType(typeof(RegistroProduto), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetById([Required][FromRoute] Guid idProduto)
     {
-        var produtoList = await _services.GetById(idProduto);
-        return Ok(produtoList);
+        try
+        {
+            var produtoList = await _services.GetById(idProduto);
+            return Ok(produtoList);
+        }
+        catch (ProdutoNotFoundException e)
+        {
+            return NotFound(e.Message);
+        }
     }
 
     /// <summary>
@@ -113,4 +140,3 @@ public class ProdutoController : ControllerBase
         return Ok(produtoList);
     }
 }
-

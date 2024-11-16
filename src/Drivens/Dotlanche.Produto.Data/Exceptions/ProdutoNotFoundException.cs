@@ -1,6 +1,6 @@
 ﻿namespace Dotlanche.Produto.Data.Exceptions;
 
-internal class ProdutoNotFoundException : Exception
+public class ProdutoNotFoundException : Exception
 {
     public ProdutoNotFoundException() : base("Produto not found!") { }
 
