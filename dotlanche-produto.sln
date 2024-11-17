@@ -6,8 +6,17 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A7BDF245-7F4B-4421-89E1-C8AD772C71A3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{17C985A7-C61B-45AC-8406-76F174E87212}"
+	ProjectSection(SolutionItems) = preProject
+		.gitkeep = .gitkeep
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A3A2B45D-BD83-4BB4-BDAB-B5DC377C58C2}"
+	ProjectSection(SolutionItems) = preProject
+		.dockerignore = .dockerignore
+		.gitignore = .gitignore
+		docker-compose.yml = docker-compose.yml
+		README.md = README.md
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{2277309B-BDA0-412B-9F55-BAD3F26F000C}"
 EndProject
@@ -22,6 +31,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotlanche.Produto.Data", "src\Drivens\Dotlanche.Produto.Data\Dotlanche.Produto.Data.csproj", "{FB7DB4A5-F59D-4869-96DC-5100E55D2B83}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotlanche.Produto.WebApi", "src\Drivers\Dotlanche.Produto.WebApi\Dotlanche.Produto.WebApi.csproj", "{CAB3FAC7-86E4-4A18-9324-0FD561FDFFBE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{1B2AEC27-A09E-48E9-962E-1AF8A44E6853}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\ci.yaml = .github\workflows\ci.yaml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +71,7 @@ Global
 		{D048D1AF-8EFA-4884-B6AC-EC4AB2967431} = {2277309B-BDA0-412B-9F55-BAD3F26F000C}
 		{FB7DB4A5-F59D-4869-96DC-5100E55D2B83} = {8C5A14E5-4170-4034-9CAC-31DCA72B7EB3}
 		{CAB3FAC7-86E4-4A18-9324-0FD561FDFFBE} = {CAA555F5-E22E-4A9A-821F-ABC86F45DC55}
+		{1B2AEC27-A09E-48E9-962E-1AF8A44E6853} = {A3A2B45D-BD83-4BB4-BDAB-B5DC377C58C2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {57908430-5179-4407-9C1F-40487A17E60B}
