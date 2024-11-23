@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Dotlanche.Produto.Data.Repositories;
 
-internal class ProdutoRepository : IProdutoRepository
+public class ProdutoRepository : IProdutoRepository
 {
     private readonly ProdutoDbContext _dbContext;
 

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Dotlanche.Produto.Data.DatabaseContext;
 
-internal class ProdutoDbContext : DbContext
+public class ProdutoDbContext : DbContext
 {
     public DbSet<RegistroProduto> Produto { get; set;}
     public DbSet<Categoria> Categoria { get; set;}
