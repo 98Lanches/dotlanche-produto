@@ -1,9 +1,6 @@
-﻿using DotLanche.Produto.Domain.Entities;
-using DotLanche.Produto.Domain.Exceptions;
-using NUnit.Framework;
-using System;
+﻿using DotLanche.Produto.Domain.Exceptions;
 
-namespace YourNamespace.Tests
+namespace DotLanche.Produto.Domain.Entities.Tests
 {
     [TestFixture]
     public class RegistroProdutoTests
