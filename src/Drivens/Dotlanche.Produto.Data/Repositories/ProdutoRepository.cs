@@ -48,17 +48,18 @@ public class ProdutoRepository : IProdutoRepository
 
     public async Task<RegistroProduto?> GetById(Guid idProduto)
     {
-        return await _dbContext.Produto.FirstOrDefaultAsync(p => p.Id == idProduto) ?? throw new ProdutoNotFoundException(idProduto);
+        return await _dbContext.Produto.Include(p => p.Categoria).FirstOrDefaultAsync(p => p.Id == idProduto) ?? throw new ProdutoNotFoundException(idProduto);
     }
 
     public async Task<RegistroProduto?> GetByName(string name)
     {
-        return await _dbContext.Produto.FirstOrDefaultAsync(p => p.Name == name) ?? throw new ProdutoNotFoundException();
+        return await _dbContext.Produto.Include(p => p.Categoria).FirstOrDefaultAsync(p => p.Name == name) ?? throw new ProdutoNotFoundException();
     }
 
     public async Task<IEnumerable<RegistroProduto>> GetByIdList(IEnumerable<Guid> orderList)
     {
         return await _dbContext.Produto
+        .Include(p => p.Categoria)
         .Where(p => orderList.Contains(p.Id))
         .ToListAsync();
     }
