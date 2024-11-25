@@ -76,6 +76,31 @@ public sealed class RecuperacaoProdutoSteps : IDisposable
         }
     }
 
+    [When(@"for consultada a categoria (.*)")]
+    public async Task WhenRetrievingProductByCategory(int idCategoria)
+    {
+        var getProdutoRoute = $"Produto/categoria?idCategoria={idCategoria}";
+        try
+        {
+            var httpResponse = await produtoApiClient.GetAsync(getProdutoRoute);
+            ScenarioContext.Current["HttpResponse"] = httpResponse;
+
+            if (httpResponse.IsSuccessStatusCode)
+            {
+                var produtos = await httpResponse.Content.ReadFromJsonAsync<IEnumerable<RegistroProduto>>(jsonOptions);
+                ScenarioContext.Current["RetrievedProduct"] = produtos;
+            }
+            else
+            {
+                ScenarioContext.Current["RetrievedProduct"] = null;
+            }
+        }
+        catch (HttpRequestException ex)
+        {
+            ScenarioContext.Current["Exception"] = ex;
+        }
+    }
+
 
     [Then(@"deve retornar o produto")]
     public void ThenShouldReturnTheProduct()
@@ -99,7 +124,62 @@ public sealed class RecuperacaoProdutoSteps : IDisposable
         retrievedProduct.Should().BeNull("no product should be returned for a nonexistent ID");
     }
 
-        public void Dispose()
+    [Then(@"deve retornar apenas os produtos dessa categoria")]
+    public void ThenShouldReturnTheProductsForGivenCategory()
+    {
+        var listaProdutos = ScenarioContext.Current["RetrievedProduct"] as IEnumerable<RegistroProduto>;
+        listaProdutos.Should().NotBeNull("a list of products should have been retrieved");
+
+        int expectedCategoriaId = 1;
+
+        listaProdutos!.Should().NotBeEmpty("at least one product should belong to the specified category");
+        listaProdutos.Should().OnlyContain(produto => produto.Categoria.Id == expectedCategoriaId,
+            because: "all retrieved products should belong to the specified category");
+    }
+
+    [When(@"for consultado a lista de produtos com ids (.*)")]
+    public async Task WhenRetrievingListOfProductsByIds(string ids)
+    {
+        var getProdutoRoute = $"Produto?orderList={ids}";
+        try
+        {
+            var httpResponse = await produtoApiClient.GetAsync(getProdutoRoute);
+            ScenarioContext.Current["HttpResponse"] = httpResponse;
+
+            if (httpResponse.IsSuccessStatusCode)
+            {
+                var produtos = await httpResponse.Content.ReadFromJsonAsync<IEnumerable<RegistroProduto>>(jsonOptions);
+                ScenarioContext.Current["RetrievedProducts"] = produtos;
+            }
+            else
+            {
+                ScenarioContext.Current["RetrievedProducts"] = null;
+            }
+        }
+        catch (HttpRequestException ex)
+        {
+            ScenarioContext.Current["Exception"] = ex;
+        }
+    }
+
+    [Then(@"deve retornar os produtos")]
+    public void ThenShouldReturnTheProducts()
+    {
+        var retrievedProducts = ScenarioContext.Current["RetrievedProducts"] as IEnumerable<RegistroProduto>;
+        retrievedProducts.Should().NotBeNull("the products should have been retrieved successfully");
+
+        var expectedIds = new List<Guid>
+        {
+            Guid.Parse("b0a518e4-f51c-4ca6-94a7-f343c1a1b339"),
+            Guid.Parse("1dabcc03-e5a0-407b-a876-d65b6c05c23d")
+        };
+
+        retrievedProducts!.Should().HaveCount(expectedIds.Count, because: "all products with the specified IDs should be returned");
+        retrievedProducts.Select(p => p.Id).Should().BeEquivalentTo(expectedIds, because: "the retrieved products should match the requested IDs");
+    }
+
+
+    public void Dispose()
     {
         scope.Dispose();
     }

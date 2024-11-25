@@ -176,6 +176,55 @@ this.ScenarioInitialize(scenarioInfo);
             }
             await this.ScenarioCleanupAsync();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Recuperar produtos em lista de pedido")]
+        public async System.Threading.Tasks.Task RecuperarProdutosEmListaDePedido()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Recuperar produtos em lista de pedido", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 19
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                await this.ScenarioStartAsync();
+                global::Reqnroll.Table table3 = new global::Reqnroll.Table(new string[] {
+                            "Id",
+                            "Name",
+                            "Description",
+                            "Price",
+                            "Categoria"});
+                table3.AddRow(new string[] {
+                            "b0a518e4-f51c-4ca6-94a7-f343c1a1b339",
+                            "Lanche E",
+                            "Um lanche para testar",
+                            "16,99",
+                            "Lanche"});
+                table3.AddRow(new string[] {
+                            "1dabcc03-e5a0-407b-a876-d65b6c05c23d",
+                            "Bebida A",
+                            "Bebida de teste",
+                            "8,99",
+                            "Bebida"});
+#line 20
+  await testRunner.GivenAsync("produtos cadastrado:", ((string)(null)), table3, "Dado ");
+#line hidden
+#line 24
+  await testRunner.WhenAsync("for consultado a lista de produtos com ids b0a518e4-f51c-4ca6-94a7-f343c1a1b339,1" +
+                        "dabcc03-e5a0-407b-a876-d65b6c05c23d", ((string)(null)), ((global::Reqnroll.Table)(null)), "Quando ");
+#line hidden
+#line 25
+  await testRunner.ThenAsync("deve retornar os produtos", ((string)(null)), ((global::Reqnroll.Table)(null)), "Então ");
+#line hidden
+            }
+            await this.ScenarioCleanupAsync();
+        }
     }
 }
 #pragma warning restore
