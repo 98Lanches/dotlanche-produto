@@ -105,8 +105,8 @@ public class ProdutoController : ControllerBase
     {
         try
         {
-            var produtoList = await _services.GetById(idProduto);
-            return Ok(produtoList);
+            var produto = await _services.GetById(idProduto);
+            return Ok(produto);
         }
         catch (ProdutoNotFoundException e)
         {
