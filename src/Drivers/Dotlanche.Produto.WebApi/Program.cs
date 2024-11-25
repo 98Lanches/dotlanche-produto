@@ -1,6 +1,7 @@
 using Dotlanche.Produto.WebApi.Extensions;
 using Dotlanche.Produto.Data.DependencyInjection;
 using System.Text.Json.Serialization;
+using Dotlanche.Produto.WebApi.Exceptions;
 
 namespace Dotlanche.Produto.WebApi;
 
@@ -17,7 +18,14 @@ public class Program
             options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
         });
 
+        builder.Services
+          .AddHealthChecks()
+          .AddNpgSql(builder.Configuration.GetConnectionString("DefaultConnection")
+          ?? throw new MisconfigurationException("ConnectionStrings:Default"));
+
         var app = builder.Build();
+
+        app.MapHealthChecks("/health");
 
         app.UseSwagger();
         app.UseSwaggerUI();
