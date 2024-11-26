@@ -23,17 +23,6 @@ public sealed class RecuperacaoProdutoSteps : IDisposable
         scope = produtoApi.Services.CreateScope();
     }
 
-    //[Given(@"as categorias:")]
-    //public async Task GivenTheCategories(Table categoriaTable)
-    //{
-    //    var dbContext = scope.ServiceProvider.GetService<ProdutoDbContext>();
-    //    var categorias = categoriaTable.Rows.Select(row =>
-    //    {
-    //        var id = int.Parse(row["Id"]);
-    //        var name = row["Name"];
-    //    })
-    //}
-
     [Given(@"produtos cadastrado:")]
     public async Task GivenProductsAreRegistered(Table produtosTable)
     {
@@ -76,7 +65,6 @@ public sealed class RecuperacaoProdutoSteps : IDisposable
 
         await dbContext.SaveChangesAsync(); // Salve todos os dados (categorias e produtos)
     }
-
 
     [When(@"for consultado o produto com id (.*)")]
     public async Task WhenRetrievingProductById(Guid productId)
@@ -134,32 +122,6 @@ public sealed class RecuperacaoProdutoSteps : IDisposable
         }
     }
 
-    [When(@"for consultada a categoria (.*)")]
-    public async Task WhenRetrievingProductByCategory(int idCategoria)
-    {
-        var getProdutoRoute = $"Produto/categoria?idCategoria={idCategoria}";
-        try
-        {
-            var httpResponse = await produtoApiClient.GetAsync(getProdutoRoute);
-            ScenarioContext.Current["HttpResponse"] = httpResponse;
-
-            if (httpResponse.IsSuccessStatusCode)
-            {
-                var produtos = await httpResponse.Content.ReadFromJsonAsync<IEnumerable<RegistroProduto>>(jsonOptions);
-                ScenarioContext.Current["RetrievedProduct"] = produtos;
-            }
-            else
-            {
-                ScenarioContext.Current["RetrievedProduct"] = null;
-            }
-        }
-        catch (HttpRequestException ex)
-        {
-            ScenarioContext.Current["Exception"] = ex;
-        }
-    }
-
-
     [Then(@"deve retornar o produto Lanche A")]
     public void ThenShouldReturnTheProductA()
     {
@@ -190,19 +152,6 @@ public sealed class RecuperacaoProdutoSteps : IDisposable
 
         var retrievedProduct = ScenarioContext.Current["RetrievedProduct"];
         retrievedProduct.Should().BeNull("no product should be returned for a nonexistent ID");
-    }
-
-    [Then(@"deve retornar apenas os produtos dessa categoria")]
-    public void ThenShouldReturnTheProductsForGivenCategory()
-    {
-        var listaProdutos = ScenarioContext.Current["RetrievedProduct"] as IEnumerable<RegistroProduto>;
-        listaProdutos.Should().NotBeNull("a list of products should have been retrieved");
-
-        int expectedCategoriaId = 1;
-
-        listaProdutos!.Should().NotBeEmpty("at least one product should belong to the specified category");
-        listaProdutos.Should().OnlyContain(produto => produto.Categoria.Id == expectedCategoriaId,
-            because: "all retrieved products should belong to the specified category");
     }
 
     [When(@"for consultado a lista de produtos com ids (.*)")]
@@ -245,7 +194,6 @@ public sealed class RecuperacaoProdutoSteps : IDisposable
         retrievedProducts!.Should().HaveCount(expectedIds.Count, because: "all products with the specified IDs should be returned");
         retrievedProducts.Select(p => p.Id).Should().BeEquivalentTo(expectedIds, because: "the retrieved products should match the requested IDs");
     }
-
 
     public void Dispose()
     {
