@@ -98,21 +98,21 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 await this.ScenarioStartAsync();
-                global::Reqnroll.Table table2 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table3 = new global::Reqnroll.Table(new string[] {
                             "Id",
                             "Name",
                             "Description",
                             "Price",
                             "Categoria",
                             "idCategoria"});
-                table2.AddRow(new string[] {
+                table3.AddRow(new string[] {
                             "a0a518e4-f51c-4ca6-94a7-f343c1a1b338",
                             "Lanche A",
                             "Um lanche para testar",
                             "14,99",
                             "Lanche",
                             "1"});
-                table2.AddRow(new string[] {
+                table3.AddRow(new string[] {
                             "0dabcc03-e5a0-407b-a876-d65b6c05c23c",
                             "Bebida A",
                             "Outra bebida de teste",
@@ -120,7 +120,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "Bebida",
                             "2"});
 #line 4
-  await testRunner.GivenAsync("produtos cadastrado:", ((string)(null)), table2, "Dado ");
+  await testRunner.GivenAsync("produtos cadastrado:", ((string)(null)), table3, "Dado ");
 #line hidden
 #line 8
   await testRunner.WhenAsync("for consultado o produto com id a0a518e4-f51c-4ca6-94a7-f343c1a1b338", ((string)(null)), ((global::Reqnroll.Table)(null)), "Quando ");
@@ -149,21 +149,21 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 await this.ScenarioStartAsync();
-                global::Reqnroll.Table table3 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table4 = new global::Reqnroll.Table(new string[] {
                             "Id",
                             "Name",
                             "Description",
                             "Price",
                             "Categoria",
                             "idCategoria"});
-                table3.AddRow(new string[] {
+                table4.AddRow(new string[] {
                             "a0a518e4-f51c-4ca6-94a7-f343c1a1b339",
                             "Lanche B",
                             "Um lance pra testares",
                             "16,99",
                             "Lanche",
                             "1"});
-                table3.AddRow(new string[] {
+                table4.AddRow(new string[] {
                             "0dabcc03-e5a0-407b-a876-d65b6c05c23d",
                             "Bebida B",
                             "Outra bebid de testes",
@@ -171,7 +171,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "Bebida",
                             "2"});
 #line 12
-  await testRunner.GivenAsync("produtos cadastrado:", ((string)(null)), table3, "Dado ");
+  await testRunner.GivenAsync("produtos cadastrado:", ((string)(null)), table4, "Dado ");
 #line hidden
 #line 16
   await testRunner.WhenAsync("for consultado o produto com id a0a518e4-f51c-4ca6-94a7-aaaaaaaaaaaa", ((string)(null)), ((global::Reqnroll.Table)(null)), "Quando ");
@@ -200,21 +200,21 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 await this.ScenarioStartAsync();
-                global::Reqnroll.Table table4 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table5 = new global::Reqnroll.Table(new string[] {
                             "Id",
                             "Name",
                             "Description",
                             "Price",
                             "Categoria",
                             "idCategoria"});
-                table4.AddRow(new string[] {
+                table5.AddRow(new string[] {
                             "90a518e4-f51c-4ca6-94a7-f343c1a1b338",
                             "Lanche C",
                             "Um lanche para testar",
                             "17,99",
                             "Lanche",
                             "1"});
-                table4.AddRow(new string[] {
+                table5.AddRow(new string[] {
                             "9dabcc03-e5a0-407b-a876-d65b6c05c23c",
                             "Bebida C",
                             "Outra bebida de teste",
@@ -222,7 +222,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "Bebida",
                             "2"});
 #line 20
-  await testRunner.GivenAsync("produtos cadastrado:", ((string)(null)), table4, "Dado ");
+  await testRunner.GivenAsync("produtos cadastrado:", ((string)(null)), table5, "Dado ");
 #line hidden
 #line 24
   await testRunner.WhenAsync("for consultado o produto com nome Lanche C", ((string)(null)), ((global::Reqnroll.Table)(null)), "Quando ");
@@ -251,21 +251,21 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 await this.ScenarioStartAsync();
-                global::Reqnroll.Table table5 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table6 = new global::Reqnroll.Table(new string[] {
                             "Id",
                             "Name",
                             "Description",
                             "Price",
                             "Categoria",
                             "idCategoria"});
-                table5.AddRow(new string[] {
+                table6.AddRow(new string[] {
                             "b0a518e4-f51c-4ca6-94a7-f343c1a1b339",
                             "Lanche D",
                             "Um lanche para testar",
                             "16,99",
                             "Lanche",
                             "1"});
-                table5.AddRow(new string[] {
+                table6.AddRow(new string[] {
                             "1dabcc03-e5a0-407b-a876-d65b6c05c23d",
                             "Bebida D",
                             "Bebida de teste",
@@ -273,7 +273,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "Bebida",
                             "2"});
 #line 28
-  await testRunner.GivenAsync("produtos cadastrado:", ((string)(null)), table5, "Dado ");
+  await testRunner.GivenAsync("produtos cadastrado:", ((string)(null)), table6, "Dado ");
 #line hidden
 #line 32
   await testRunner.WhenAsync("for consultado a lista de produtos com ids b0a518e4-f51c-4ca6-94a7-f343c1a1b339,1" +
@@ -303,21 +303,21 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 await this.ScenarioStartAsync();
-                global::Reqnroll.Table table6 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table7 = new global::Reqnroll.Table(new string[] {
                             "Id",
                             "Name",
                             "Description",
                             "Price",
                             "Categoria",
                             "idCategoria"});
-                table6.AddRow(new string[] {
+                table7.AddRow(new string[] {
                             "99a518e4-f51c-4ca6-94a7-f343c1a1b339",
                             "Lanche E",
                             "Um lanche para testar",
                             "22,99",
                             "Lanche",
                             "1"});
-                table6.AddRow(new string[] {
+                table7.AddRow(new string[] {
                             "99abcc03-e5a0-407b-a876-d65b6c05c23d",
                             "Bebida E",
                             "Bebida de teste",
@@ -325,7 +325,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "Bebida",
                             "2"});
 #line 36
-  await testRunner.GivenAsync("produtos cadastrado:", ((string)(null)), table6, "Dado ");
+  await testRunner.GivenAsync("produtos cadastrado:", ((string)(null)), table7, "Dado ");
 #line hidden
 #line 40
   await testRunner.WhenAsync("for consultado a lista de produtos de categoria 1", ((string)(null)), ((global::Reqnroll.Table)(null)), "Quando ");
