@@ -27,7 +27,7 @@ public class ProdutoRepository : IProdutoRepository
 
     public async Task<RegistroProduto> Delete(Guid idProduto)
     {
-        var produto = await _dbContext.Produto.FirstOrDefaultAsync(p => p.Id == idProduto) ?? throw new ProdutoNotFoundException();
+        var produto = await _dbContext.Produto.Include(p => p.Categoria).FirstOrDefaultAsync(p => p.Id == idProduto) ?? throw new ProdutoNotFoundException();
         _dbContext.Produto.Remove(produto);
         await _dbContext.SaveChangesAsync();
         return produto;
