@@ -31,3 +31,11 @@ Cenário: Recuperar produtos em lista de pedido
         | 1dabcc03-e5a0-407b-a876-d65b6c05c23d | Bebida D | Bebida de teste       |  8,99     | Bebida    | 2           |
 		Quando for consultado a lista de produtos com ids b0a518e4-f51c-4ca6-94a7-f343c1a1b339,1dabcc03-e5a0-407b-a876-d65b6c05c23d
 		Então deve retornar os produtos Lanche D e Bebida D
+
+Cenário: Recuperar produtos em categoria
+		Dado produtos cadastrado:
+		| Id                                   | Name     | Description           | Price     | Categoria | idCategoria |
+		| 99a518e4-f51c-4ca6-94a7-f343c1a1b339 | Lanche E | Um lanche para testar | 22,99     | Lanche    | 1           |
+        | 99abcc03-e5a0-407b-a876-d65b6c05c23d | Bebida E | Bebida de teste       | 13,99     | Bebida    | 2           |
+		Quando for consultado a lista de produtos de categoria 1
+		Então deve retornar produtos com a categoria Lanche

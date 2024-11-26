@@ -285,6 +285,57 @@ this.ScenarioInitialize(scenarioInfo);
             }
             await this.ScenarioCleanupAsync();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Recuperar produtos em categoria")]
+        public async System.Threading.Tasks.Task RecuperarProdutosEmCategoria()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Recuperar produtos em categoria", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 35
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                await this.ScenarioStartAsync();
+                global::Reqnroll.Table table6 = new global::Reqnroll.Table(new string[] {
+                            "Id",
+                            "Name",
+                            "Description",
+                            "Price",
+                            "Categoria",
+                            "idCategoria"});
+                table6.AddRow(new string[] {
+                            "99a518e4-f51c-4ca6-94a7-f343c1a1b339",
+                            "Lanche E",
+                            "Um lanche para testar",
+                            "22,99",
+                            "Lanche",
+                            "1"});
+                table6.AddRow(new string[] {
+                            "99abcc03-e5a0-407b-a876-d65b6c05c23d",
+                            "Bebida E",
+                            "Bebida de teste",
+                            "13,99",
+                            "Bebida",
+                            "2"});
+#line 36
+  await testRunner.GivenAsync("produtos cadastrado:", ((string)(null)), table6, "Dado ");
+#line hidden
+#line 40
+  await testRunner.WhenAsync("for consultado a lista de produtos de categoria 1", ((string)(null)), ((global::Reqnroll.Table)(null)), "Quando ");
+#line hidden
+#line 41
+  await testRunner.ThenAsync("deve retornar produtos com a categoria Lanche", ((string)(null)), ((global::Reqnroll.Table)(null)), "Então ");
+#line hidden
+            }
+            await this.ScenarioCleanupAsync();
+        }
     }
 }
 #pragma warning restore
