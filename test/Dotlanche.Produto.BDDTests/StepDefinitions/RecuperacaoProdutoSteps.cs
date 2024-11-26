@@ -23,35 +23,93 @@ public sealed class RecuperacaoProdutoSteps : IDisposable
         scope = produtoApi.Services.CreateScope();
     }
 
+    //[Given(@"as categorias:")]
+    //public async Task GivenTheCategories(Table categoriaTable)
+    //{
+    //    var dbContext = scope.ServiceProvider.GetService<ProdutoDbContext>();
+    //    var categorias = categoriaTable.Rows.Select(row =>
+    //    {
+    //        var id = int.Parse(row["Id"]);
+    //        var name = row["Name"];
+    //    })
+    //}
+
     [Given(@"produtos cadastrado:")]
     public async Task GivenProductsAreRegistered(Table produtosTable)
     {
         var dbContext = scope.ServiceProvider.GetRequiredService<ProdutoDbContext>();
-        var produtos = produtosTable.Rows.Select(row =>
+
+        // Dicionário para rastrear categorias únicas
+        var categoriasMap = new Dictionary<int, Categoria>();
+
+        foreach (var row in produtosTable.Rows)
         {
             var id = Guid.Parse(row["Id"]);
             var name = row["Name"];
             var description = row["Description"];
             var price = decimal.Parse(row["Price"]);
-            var categoria = new Categoria { Name = row["Categoria"] };
+            var idCategoria = int.Parse(row["idCategoria"]);
+            var categoriaName = row["Categoria"];
 
-            return new RegistroProduto(id)
+            // Verifique se a categoria já existe no banco de dados
+            var categoria = await dbContext.Categoria
+                .FirstOrDefaultAsync(c => c.Id == idCategoria);
+
+            if (categoria is null)
+            {
+                // Se não existe, crie uma nova categoria
+                categoria = new Categoria { Id = idCategoria, Name = categoriaName };
+                dbContext.Categoria.Add(categoria);  // Adiciona a nova categoria
+            }
+
+            // Crie o produto e associe a categoria já existente ou a nova categoria
+            var produto = new RegistroProduto(id)
             {
                 Name = name,
                 Description = description,
                 Price = price,
                 Categoria = categoria
             };
-        }).ToList();
 
-        dbContext.Produto.AddRange(produtos);
-        await dbContext.SaveChangesAsync();
+            dbContext.Produto.Add(produto);
+        }
+
+        await dbContext.SaveChangesAsync(); // Salve todos os dados (categorias e produtos)
     }
+
 
     [When(@"for consultado o produto com id (.*)")]
     public async Task WhenRetrievingProductById(Guid productId)
     {
         var getProdutoRoute = $"Produto/{productId}";
+        try
+        {
+            var httpResponse = await produtoApiClient.GetAsync(getProdutoRoute);
+            ScenarioContext.Current["HttpResponse"] = httpResponse;
+            if (httpResponse.IsSuccessStatusCode)
+            {
+                var produto = await httpResponse.Content.ReadFromJsonAsync<RegistroProduto>(jsonOptions);
+                ScenarioContext.Current["RetrievedProduct"] = produto;
+            }
+            else
+            {
+                ScenarioContext.Current["RetrievedProduct"] = null;
+            }
+        }
+        catch (HttpRequestException ex)
+        {
+            ScenarioContext.Current["Exception"] = ex;
+        }
+        catch (ProdutoNotFoundException ex)
+        {
+            ScenarioContext.Current["Exception"] = ex;
+        }
+    }
+
+    [When(@"for consultado o produto com nome (.*)")]
+    public async Task WhenRetrievingProductByName(string nomeProduto)
+    {
+        var getProdutoRoute = $"Produto/nome?nomeProduto={nomeProduto}";
         try
         {
             var httpResponse = await produtoApiClient.GetAsync(getProdutoRoute);
@@ -102,13 +160,23 @@ public sealed class RecuperacaoProdutoSteps : IDisposable
     }
 
 
-    [Then(@"deve retornar o produto")]
-    public void ThenShouldReturnTheProduct()
+    [Then(@"deve retornar o produto Lanche A")]
+    public void ThenShouldReturnTheProductA()
     {
         var produto = ScenarioContext.Current["RetrievedProduct"] as RegistroProduto;
         produto.Should().NotBeNull();
         produto!.Name.Should().Be("Lanche A");
         produto.Price.Should().Be(14.99m);
+        produto.Categoria.Name.Should().Be("Lanche");
+    }
+
+    [Then(@"deve retornar o produto Lanche C")]
+    public void ThenShouldReturnTheProductC()
+    {
+        var produto = ScenarioContext.Current["RetrievedProduct"] as RegistroProduto;
+        produto.Should().NotBeNull();
+        produto!.Name.Should().Be("Lanche C");
+        produto.Price.Should().Be(17.99m);
         produto.Categoria.Name.Should().Be("Lanche");
     }
 
@@ -162,7 +230,7 @@ public sealed class RecuperacaoProdutoSteps : IDisposable
         }
     }
 
-    [Then(@"deve retornar os produtos")]
+    [Then(@"deve retornar os produtos Lanche D e Bebida D")]
     public void ThenShouldReturnTheProducts()
     {
         var retrievedProducts = ScenarioContext.Current["RetrievedProducts"] as IEnumerable<RegistroProduto>;

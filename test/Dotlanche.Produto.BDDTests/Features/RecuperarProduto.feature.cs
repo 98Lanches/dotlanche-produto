@@ -98,32 +98,35 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 await this.ScenarioStartAsync();
-                global::Reqnroll.Table table1 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table2 = new global::Reqnroll.Table(new string[] {
                             "Id",
                             "Name",
                             "Description",
                             "Price",
-                            "Categoria"});
-                table1.AddRow(new string[] {
+                            "Categoria",
+                            "idCategoria"});
+                table2.AddRow(new string[] {
                             "a0a518e4-f51c-4ca6-94a7-f343c1a1b338",
                             "Lanche A",
                             "Um lanche para testar",
                             "14,99",
-                            "Lanche"});
-                table1.AddRow(new string[] {
+                            "Lanche",
+                            "1"});
+                table2.AddRow(new string[] {
                             "0dabcc03-e5a0-407b-a876-d65b6c05c23c",
-                            "Lanche B",
-                            "Outro lanche de teste",
+                            "Bebida A",
+                            "Outra bebida de teste",
                             "19,99",
-                            "Lanche"});
+                            "Bebida",
+                            "2"});
 #line 4
-  await testRunner.GivenAsync("produtos cadastrado:", ((string)(null)), table1, "Dado ");
+  await testRunner.GivenAsync("produtos cadastrado:", ((string)(null)), table2, "Dado ");
 #line hidden
 #line 8
   await testRunner.WhenAsync("for consultado o produto com id a0a518e4-f51c-4ca6-94a7-f343c1a1b338", ((string)(null)), ((global::Reqnroll.Table)(null)), "Quando ");
 #line hidden
 #line 9
-  await testRunner.ThenAsync("deve retornar o produto", ((string)(null)), ((global::Reqnroll.Table)(null)), "Então ");
+  await testRunner.ThenAsync("deve retornar o produto Lanche A", ((string)(null)), ((global::Reqnroll.Table)(null)), "Então ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
@@ -146,26 +149,29 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 await this.ScenarioStartAsync();
-                global::Reqnroll.Table table2 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table3 = new global::Reqnroll.Table(new string[] {
                             "Id",
                             "Name",
                             "Description",
                             "Price",
-                            "Categoria"});
-                table2.AddRow(new string[] {
+                            "Categoria",
+                            "idCategoria"});
+                table3.AddRow(new string[] {
                             "a0a518e4-f51c-4ca6-94a7-f343c1a1b339",
-                            "Lanche C",
+                            "Lanche B",
                             "Um lance pra testares",
                             "16,99",
-                            "Lanche"});
-                table2.AddRow(new string[] {
+                            "Lanche",
+                            "1"});
+                table3.AddRow(new string[] {
                             "0dabcc03-e5a0-407b-a876-d65b6c05c23d",
-                            "Lanche D",
-                            "Outro lance de testes",
+                            "Bebida B",
+                            "Outra bebid de testes",
                             "18,99",
-                            "Lanche"});
+                            "Bebida",
+                            "2"});
 #line 12
-  await testRunner.GivenAsync("produtos cadastrado:", ((string)(null)), table2, "Dado ");
+  await testRunner.GivenAsync("produtos cadastrado:", ((string)(null)), table3, "Dado ");
 #line hidden
 #line 16
   await testRunner.WhenAsync("for consultado o produto com id a0a518e4-f51c-4ca6-94a7-aaaaaaaaaaaa", ((string)(null)), ((global::Reqnroll.Table)(null)), "Quando ");
@@ -178,12 +184,12 @@ this.ScenarioInitialize(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Recuperar produtos em lista de pedido")]
-        public async System.Threading.Tasks.Task RecuperarProdutosEmListaDePedido()
+        [NUnit.Framework.DescriptionAttribute("Recuperar um produto existente pelo nome")]
+        public async System.Threading.Tasks.Task RecuperarUmProdutoExistentePeloNome()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Recuperar produtos em lista de pedido", null, tagsOfScenario, argumentsOfScenario, featureTags);
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Recuperar um produto existente pelo nome", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 19
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -194,33 +200,87 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 await this.ScenarioStartAsync();
-                global::Reqnroll.Table table3 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table4 = new global::Reqnroll.Table(new string[] {
                             "Id",
                             "Name",
                             "Description",
                             "Price",
-                            "Categoria"});
-                table3.AddRow(new string[] {
-                            "b0a518e4-f51c-4ca6-94a7-f343c1a1b339",
-                            "Lanche E",
+                            "Categoria",
+                            "idCategoria"});
+                table4.AddRow(new string[] {
+                            "90a518e4-f51c-4ca6-94a7-f343c1a1b338",
+                            "Lanche C",
                             "Um lanche para testar",
-                            "16,99",
-                            "Lanche"});
-                table3.AddRow(new string[] {
-                            "1dabcc03-e5a0-407b-a876-d65b6c05c23d",
-                            "Bebida A",
-                            "Bebida de teste",
-                            "8,99",
-                            "Bebida"});
+                            "17,99",
+                            "Lanche",
+                            "1"});
+                table4.AddRow(new string[] {
+                            "9dabcc03-e5a0-407b-a876-d65b6c05c23c",
+                            "Bebida C",
+                            "Outra bebida de teste",
+                            "12,99",
+                            "Bebida",
+                            "2"});
 #line 20
-  await testRunner.GivenAsync("produtos cadastrado:", ((string)(null)), table3, "Dado ");
+  await testRunner.GivenAsync("produtos cadastrado:", ((string)(null)), table4, "Dado ");
 #line hidden
 #line 24
+  await testRunner.WhenAsync("for consultado o produto com nome Lanche C", ((string)(null)), ((global::Reqnroll.Table)(null)), "Quando ");
+#line hidden
+#line 25
+  await testRunner.ThenAsync("deve retornar o produto Lanche C", ((string)(null)), ((global::Reqnroll.Table)(null)), "Então ");
+#line hidden
+            }
+            await this.ScenarioCleanupAsync();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Recuperar produtos em lista de pedido")]
+        public async System.Threading.Tasks.Task RecuperarProdutosEmListaDePedido()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Recuperar produtos em lista de pedido", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 27
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                await this.ScenarioStartAsync();
+                global::Reqnroll.Table table5 = new global::Reqnroll.Table(new string[] {
+                            "Id",
+                            "Name",
+                            "Description",
+                            "Price",
+                            "Categoria",
+                            "idCategoria"});
+                table5.AddRow(new string[] {
+                            "b0a518e4-f51c-4ca6-94a7-f343c1a1b339",
+                            "Lanche D",
+                            "Um lanche para testar",
+                            "16,99",
+                            "Lanche",
+                            "1"});
+                table5.AddRow(new string[] {
+                            "1dabcc03-e5a0-407b-a876-d65b6c05c23d",
+                            "Bebida D",
+                            "Bebida de teste",
+                            "8,99",
+                            "Bebida",
+                            "2"});
+#line 28
+  await testRunner.GivenAsync("produtos cadastrado:", ((string)(null)), table5, "Dado ");
+#line hidden
+#line 32
   await testRunner.WhenAsync("for consultado a lista de produtos com ids b0a518e4-f51c-4ca6-94a7-f343c1a1b339,1" +
                         "dabcc03-e5a0-407b-a876-d65b6c05c23d", ((string)(null)), ((global::Reqnroll.Table)(null)), "Quando ");
 #line hidden
-#line 25
-  await testRunner.ThenAsync("deve retornar os produtos", ((string)(null)), ((global::Reqnroll.Table)(null)), "Então ");
+#line 33
+  await testRunner.ThenAsync("deve retornar os produtos Lanche D e Bebida D", ((string)(null)), ((global::Reqnroll.Table)(null)), "Então ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
