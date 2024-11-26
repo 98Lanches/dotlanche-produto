@@ -105,8 +105,28 @@ public class ProdutoController : ControllerBase
     {
         try
         {
-            var produtoList = await _services.GetById(idProduto);
-            return Ok(produtoList);
+            var produto = await _services.GetById(idProduto);
+            return Ok(produto);
+        }
+        catch (ProdutoNotFoundException e)
+        {
+            return NotFound(e.Message);
+        }
+    }
+
+    /// <summary>
+    /// Busca produtos pelo nome
+    /// </summary>
+    /// <param name="nomeProduto">Nome do produto a ser buscado</param>
+    /// <returns>Produto pelo nome</returns>
+    [HttpGet("nome")]
+    [ProducesResponseType(typeof(RegistroProduto), StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetById([Required][FromQuery] string nomeProduto)
+    {
+        try
+        {
+            var produto = await _services.GetByName(nomeProduto);
+            return Ok(produto);
         }
         catch (ProdutoNotFoundException e)
         {
