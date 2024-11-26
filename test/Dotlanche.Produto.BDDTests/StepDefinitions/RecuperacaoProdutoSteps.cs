@@ -28,7 +28,6 @@ public sealed class RecuperacaoProdutoSteps : IDisposable
     {
         var dbContext = scope.ServiceProvider.GetRequiredService<ProdutoDbContext>();
 
-        // Dicionário para rastrear categorias únicas
         var categoriasMap = new Dictionary<int, Categoria>();
 
         foreach (var row in produtosTable.Rows)
@@ -40,18 +39,15 @@ public sealed class RecuperacaoProdutoSteps : IDisposable
             var idCategoria = int.Parse(row["idCategoria"]);
             var categoriaName = row["Categoria"];
 
-            // Verifique se a categoria já existe no banco de dados
             var categoria = await dbContext.Categoria
                 .FirstOrDefaultAsync(c => c.Id == idCategoria);
 
             if (categoria is null)
             {
-                // Se não existe, crie uma nova categoria
                 categoria = new Categoria { Id = idCategoria, Name = categoriaName };
-                dbContext.Categoria.Add(categoria);  // Adiciona a nova categoria
+                dbContext.Categoria.Add(categoria);
             }
 
-            // Crie o produto e associe a categoria já existente ou a nova categoria
             var produto = new RegistroProduto(id)
             {
                 Name = name,
@@ -63,7 +59,7 @@ public sealed class RecuperacaoProdutoSteps : IDisposable
             dbContext.Produto.Add(produto);
         }
 
-        await dbContext.SaveChangesAsync(); // Salve todos os dados (categorias e produtos)
+        await dbContext.SaveChangesAsync();
     }
 
     [When(@"for consultado o produto com id (.*)")]
