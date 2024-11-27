@@ -31,11 +31,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dotlanche.Produto.WebApi", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{1B2AEC27-A09E-48E9-962E-1AF8A44E6853}"
 	ProjectSection(SolutionItems) = preProject
+		.github\workflows\cd.yaml = .github\workflows\cd.yaml
 		.github\workflows\ci.yaml = .github\workflows\ci.yaml
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dotlanche.Produto.BDDTests", "test\Dotlanche.Produto.BDDTests\Dotlanche.Produto.BDDTests.csproj", "{52FD0549-5E49-4A35-93CE-ED0CAA31CEFD}"
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotlanche.Produto.UnitTests", "test\Dotlanche.Produto.UnitTests\Dotlanche.Produto.UnitTests.csproj", "{86ADE14F-4802-4E70-B216-02C40679DF04}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dotlanche.Produto.UnitTests", "test\Dotlanche.Produto.UnitTests\Dotlanche.Produto.UnitTests.csproj", "{86ADE14F-4802-4E70-B216-02C40679DF04}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
