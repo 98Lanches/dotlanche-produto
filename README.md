@@ -25,7 +25,7 @@ Microsserviço de produtos Dotlanches. Responsável pelo gerenciamento de produt
 - GitHub Actions
 
 # Arquitetura do Sistema
-O serviço foi construído utilizando arquitetura hexagonal para organização interna. O banco de dados selecionado foi o Postgresql pela proximidade do time com esta ferramenta.
+O serviço é uma Web API com alguns endpoints síncronos. Foi construído utilizando arquitetura hexagonal para organização interna. O banco de dados selecionado foi o Postgresql pela proximidade do time com esta ferramenta.
 
 # Arquitetura da Solução
 ![arquiretura_solucao](docs/arquitetura-produto.jpg)
